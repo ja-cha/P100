@@ -9,7 +9,7 @@ class P23Speck
   "result1" must "be 7" in {
     P23.
       solution("13 DUP 4 POP 5 DUP + DUP + -").
-      shouldBe{
+      shouldBe {
         7
       }
   }
@@ -37,7 +37,6 @@ class P23Speck
         20
       }
   }
-
 
 
 }

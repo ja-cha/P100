@@ -6,13 +6,13 @@ class P05Speck
   extends FlatSpec with Matchers {
 
 
-  val DATA = List('A' to 'Z': _*)
-  val EXPECTED = DATA.reverse
+  val DATA:List[Char] = List('A' to 'Z': _*)
+  val EXPECTED:List[Char] = DATA.reverse
 
-  s"The reverse of $DATA" should  s"be $EXPECTED" in {
+  s"The reverse of $DATA" should s"be $EXPECTED" in {
     EXPECTED shouldBe {
 
-     P05.reverseRecursive( DATA )
+      P05.reverseRecursive(DATA)
     }
   }
 

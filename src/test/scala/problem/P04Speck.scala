@@ -6,13 +6,13 @@ class P04Speck
   extends FlatSpec with Matchers {
 
 
-  val DATA = List('A' to 'Z': _*)
-  val EXPECTED = DATA.size
+  val DATA:List[Char] = List('A' to 'Z': _*)
+  val EXPECTED:Int = DATA.size
 
-  s"The length of $DATA" should  s"be $EXPECTED" in {
+  s"The length of $DATA" should s"be $EXPECTED" in {
     EXPECTED shouldBe {
 
-      P04.lengthRecursive( DATA )
+      P04.lengthRecursive(DATA)
     }
   }
 

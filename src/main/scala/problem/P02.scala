@@ -1,6 +1,6 @@
 package problem
 
-object P02{
+object P02 {
 
   def penultimateBuiltIn[A](aList: List[A]): A =
     if (aList.isEmpty) throw new NoSuchElementException
@@ -8,8 +8,8 @@ object P02{
 
   def penultimateRecursive[A](aList: List[A]): A =
     aList match {
-    case head :: _ :: Nil  => head
-    case _ :: tail => penultimateRecursive(tail)
-    case _         => throw new NoSuchElementException
-  }
+      case head :: _ :: Nil => head
+      case _ :: tail => penultimateRecursive(tail)
+      case _ => throw new NoSuchElementException
+    }
 }

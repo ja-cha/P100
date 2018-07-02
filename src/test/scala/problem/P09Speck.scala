@@ -3,7 +3,6 @@ package problem
 import org.scalatest._
 
 
-
 class P09Speck
   extends FlatSpec with Matchers {
 
@@ -13,9 +12,9 @@ class P09Speck
   val EXPECTED = List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))
 
   s"""consecutive compression of $DATA""" should s"""be $EXPECTED""" in {
-      (EXPECTED) shouldEqual {
-        P09.sublistConsecutives(DATA)
-      }
+    EXPECTED shouldEqual {
+      P09.sublistConsecutives(DATA)
     }
+  }
 }
 

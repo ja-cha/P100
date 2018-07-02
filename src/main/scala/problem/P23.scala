@@ -5,9 +5,9 @@ import scala.collection.mutable.{ListBuffer => MutableList}
 
 object P23 {
 
-  var stack:MutableList[Int] = _
+  var stack: MutableList[Int] = _
 
-  def solution(t: String):Int = {
+  def solution(t: String): Int = {
 
     stack = MutableList[Int]()
     val instructions = t.split("\\s").toList
@@ -15,13 +15,13 @@ object P23 {
 
   }
 
-  def process(aInstructions: List[String]):Int = {
+  def process(aInstructions: List[String]): Int = {
 
     aInstructions match {
 
       case instruction :: tail =>
         instruction match {
-          case "+" =>  plus( tail)
+          case "+" => plus(tail)
           case "-" => minus(tail)
           case "DUP" => duplicate(None, tail)
           case "POP" => pop(tail)
@@ -38,9 +38,9 @@ object P23 {
   }
 
   private def minus[Int](t: List[String]) = {
-    if(stack.size<2){
+    if (stack.size < 2) {
       -1
-    }else {
+    } else {
       val a = stack.last
       stack -= stack.last
       val b = stack.last
@@ -52,7 +52,7 @@ object P23 {
   }
 
   private def plus[Int](t: List[String]) = {
-    if(stack.size<2){
+    if (stack.size < 2) {
       -1
     }
     else {
@@ -73,7 +73,7 @@ object P23 {
 
   private def duplicate[Int](h: Option[String], t: List[String]) = {
 
-    if(h.isEmpty)
+    if (h.isEmpty)
       stack += stack.last
     else
       stack += h.get.toInt

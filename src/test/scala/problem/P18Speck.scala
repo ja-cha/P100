@@ -5,7 +5,6 @@ import org.scalatest._
 import scala.collection.immutable.List
 
 
-
 class P18Speck
   extends FlatSpec with Matchers {
 
@@ -15,9 +14,9 @@ class P18Speck
   val EXPECTED = List('a, 'e, 'a, 'b)
 
   s"extracting a slice from $DATA" should s"yield $EXPECTED" in {
-       EXPECTED shouldEqual {
-        P18.extractSlice(2, 4, DATA)
-      }
+    EXPECTED shouldEqual {
+      P18.extractSlice(2, 4, DATA)
+    }
   }
 }
 

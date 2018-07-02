@@ -4,7 +4,7 @@ object P14 {
 
   def dropNthItem[A](n: Int, aList: List[A]): List[A] = {
 
-    def inner[B<:A](c: Int, aList: List[B]): List[ B] =
+    def inner(c: Int, aList: List[A]): List[A] =
       (c, aList) match {
         case (_, Nil) => Nil
 

@@ -3,7 +3,6 @@ package problem
 import org.scalatest._
 
 
-
 class P17Speck
   extends FlatSpec with Matchers {
 
@@ -13,9 +12,9 @@ class P17Speck
   val EXPECTED = Some('f)
 
   s"first non duplicate in $DATA" should s"yield $EXPECTED" in {
-      // EXPECTED shouldEqual {
-       println( P17.findFirstNonDuplicate( DATA))
-      //}
+    // EXPECTED shouldEqual {
+    println(P17.findFirstNonDuplicate(DATA))
+    //}
   }
 }
 

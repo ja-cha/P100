@@ -8,9 +8,9 @@ class P02Speck
   val DATA = List(1 to 10: _*)
   val EXPECTED = 9
 
-  s"Penultimate item of $DATA" should  s"be $EXPECTED" in {
+  s"Penultimate item of $DATA" should s"be $EXPECTED" in {
     EXPECTED shouldBe {
-      P02.penultimateRecursive( DATA )
+      P02.penultimateRecursive(DATA)
     }
   }
 }

@@ -6,9 +6,9 @@ object P05 {
 
   def reverseRecursive[A](aList: List[A]): List[A] =
     aList match {
-    case head :: Nil  => List(head)
-    case head :: tail => reverseRecursive(tail) ::: List(head)
-    case _         => throw new NoSuchElementException
-  }
+      case head :: Nil => List(head)
+      case head :: tail => reverseRecursive(tail) ::: List(head)
+      case _ => throw new NoSuchElementException
+    }
 
 }

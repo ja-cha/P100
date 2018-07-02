@@ -8,9 +8,9 @@ class P00Speck
   val DATA = "CAFE"
   val EXPECTED = 51966
 
-  s"Hexadecimal '$DATA'" should  s"be Decimal '$EXPECTED'" in {
-    (EXPECTED) shouldBe {
-     P00.hexToInt( DATA )
+  s"Hexadecimal '$DATA'" should s"be Decimal '$EXPECTED'" in {
+    EXPECTED shouldBe {
+      P00.hexToInt(DATA)
     }
   }
 

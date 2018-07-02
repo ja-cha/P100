@@ -9,7 +9,7 @@ class P01Speck
   val EXPECTED = 10
 
   "Last item" should s"be $EXPECTED" in {
-    assert(P01.lastRecursive( DATA ) == 10)
+    assert(P01.lastRecursive(DATA) == 10)
   }
 
 }
