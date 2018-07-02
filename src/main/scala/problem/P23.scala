@@ -5,38 +5,39 @@ import scala.collection.mutable.{ListBuffer => MutableList}
 
 object P23 {
 
-  var stack:MutableList[Int] = null
+  var stack:MutableList[Int] = _
 
   def solution(t: String):Int = {
+
     stack = MutableList[Int]()
     val instructions = t.split("\\s").toList
-   val result = process(instructions)
-
-    result
+    process(instructions)
 
   }
 
   def process(aInstructions: List[String]):Int = {
 
-    (aInstructions) match {
-      case head :: tail => {
-        head match {
+    aInstructions match {
+
+      case instruction :: tail =>
+        instruction match {
           case "+" =>  plus( tail)
           case "-" => minus(tail)
           case "DUP" => duplicate(None, tail)
           case "POP" => pop(tail)
-          case _ =>{
-            stack += head.toInt
-            process(tail)
-          }
+          case number => push(number, tail)
         }
-      }
       case Nil => stack.last
     }
 
   }
 
-  def minus[Int](t: List[String]) = {
+  private def push(head: String, tail: List[String]) = {
+    stack += head.toInt
+    process(tail)
+  }
+
+  private def minus[Int](t: List[String]) = {
     if(stack.size<2){
       -1
     }else {
@@ -50,7 +51,7 @@ object P23 {
 
   }
 
-  def plus[Int](t: List[String]) = {
+  private def plus[Int](t: List[String]) = {
     if(stack.size<2){
       -1
     }
@@ -64,13 +65,13 @@ object P23 {
     }
   }
 
-  def pop[Int](t: List[String]) = {
+  private def pop[Int](t: List[String]) = {
     stack -= stack.last
     process(t)
 
   }
 
-  def duplicate[Int](h: Option[String], t: List[String]) = {
+  private def duplicate[Int](h: Option[String], t: List[String]) = {
 
     if(h.isEmpty)
       stack += stack.last
