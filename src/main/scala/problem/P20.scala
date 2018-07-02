@@ -6,7 +6,7 @@ object P20 {
 
     (index, list) match {
       case (_, Nil) => Nil
-      case (1, _ :: tail) => tail
+      case (1, h :: tail) => tail
       case (`index`, h :: tail) => h :: removeAt(`index` - 1, tail)
     }
 
