@@ -37,6 +37,12 @@ object P23 {
     process(tail)
   }
 
+  private def pop[Int](t: List[String]) = {
+    stack -= stack.last
+    process(t)
+
+  }
+
   private def minus[Int](t: List[String]) = {
     if (stack.size < 2) {
       -1
@@ -65,12 +71,6 @@ object P23 {
     }
   }
 
-  private def pop[Int](t: List[String]) = {
-    stack -= stack.last
-    process(t)
-
-  }
-
   private def duplicate[Int](h: Option[String], t: List[String]) = {
 
     if (h.isEmpty)
@@ -81,5 +81,6 @@ object P23 {
     process(t)
 
   }
+
 }
 
