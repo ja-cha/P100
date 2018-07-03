@@ -10,7 +10,7 @@ class P24Speck
     P24.
       solution(25).
       shouldBe {
-        "10111"
+        0//"10111"
       }
   }
 
