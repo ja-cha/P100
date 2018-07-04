@@ -4,21 +4,16 @@ object P24 {
 
   def solution(number: Int): List[Int] = {
 
-    val hexadecimalsList = asHexadecimalsList(number)
-
-    println(hexadecimalsList)
-
-    asBinaryList(hexadecimalsList)
+    asBinaryList(asBase2List(number))
 
   }
 
-  private def asHexadecimalsList(aNumber: Int): List[Int] = {
+  private def asBase2List(aNumber: Int): List[Int] = {
 
     aNumber match {
 
       case number if number <= 2 => number :: Nil
       case number =>
-
         val highestPower2Result = Math.pow(2, highestExponentIn(2, number)).toInt
 
         val remainder = number - highestPower2Result
@@ -26,11 +21,9 @@ object P24 {
         remainder match {
           case 0 =>
             highestPower2Result :: Nil
-          case n => highestPower2Result :: asHexadecimalsList(n)
+          case r => highestPower2Result :: asBase2List(r)
         }
-
     }
-
   }
 
 
