@@ -19,14 +19,14 @@ object P24 {
       case number if number <= 2 => number :: Nil
       case number =>
 
-        val highestPower2Val = Math.pow(2, exponent(number)).toInt
+        val highestPower2Result = Math.pow(2, highestExponentIn(2, number)).toInt
 
-        val remainder = number - highestPower2Val
+        val remainder = number - highestPower2Result
 
         remainder match {
           case 0 =>
-            highestPower2Val :: Nil
-          case n => highestPower2Val :: asHexadecimalsList(n)
+            highestPower2Result :: Nil
+          case n => highestPower2Result :: asHexadecimalsList(n)
         }
 
     }
@@ -36,29 +36,24 @@ object P24 {
 
   private def asBinaryList(hexadecimalsList: List[Int]) = {
 
-    val size = exponent(hexadecimalsList.head) + 1
+    val size = highestExponentIn(2, hexadecimalsList.head)
 
-    List.fill(size)(0).zipWithIndex.reverse.map { case (_, exponent) =>
-
-      val value = Math.pow(2, exponent).toInt
-      if (hexadecimalsList.contains(value)) {
-        1
-      } else {
-        0
-      }
-
+    List.fill(size+1)(0).zipWithIndex.reverse.map {
+      case (slot, exp) if (hexadecimalsList.contains(Math.pow(2, exp).toInt)) => 1
+      case _  => 0
     }
+
   }
 
-  private def exponent(number: Int): Int = {
+  private def highestExponentIn(base:Int, number: Int): Int = {
 
-    var exponent = 0
+    var highestExponent= 0
 
-    while (Math.pow(2, exponent).toInt <= number) {
-      exponent = exponent + 1
+    while (Math.pow(base, highestExponent).toInt <= number) {
+      highestExponent = highestExponent + 1
     }
-    if (exponent > 0) {
-      exponent - 1
+    if (highestExponent > 0) {
+      highestExponent - 1
     } else {
       0
     }
