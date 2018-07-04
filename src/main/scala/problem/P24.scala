@@ -21,10 +21,12 @@ object P24 {
 
         val highestPower2Val = Math.pow(2, exponent(number)).toInt
 
-        number - highestPower2Val match {
+        val remainder = number - highestPower2Val
+
+        remainder match {
           case 0 =>
             highestPower2Val :: Nil
-          case remainder => highestPower2Val :: asHexadecimalsList(remainder)
+          case n => highestPower2Val :: asHexadecimalsList(n)
         }
 
     }
