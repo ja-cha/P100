@@ -1,107 +1,66 @@
 package problem
 
-import java.util
-
-import scala.collection.mutable.ListBuffer
-
 object P24 {
 
+  def solution(number: Int): List[Int] = {
 
-    var l = new ListBuffer[Int]()
-  def solution(number: Int):Int = {
+    val hexadecimalsList = asHexadecimalsList(number)
 
+    println(hexadecimalsList)
 
-    //25 =
-    //20 + 5
-    //16 + 9
-    //8 + 1
-    // 16 + 8 + 1
-// 11001
-    decimate(number).map{ n =>
+    asBinaryList(hexadecimalsList)
 
-      val toThePowerOf = Math.sqrt(n).floor.toInt
-      val v  = Math.pow(2, toThePowerOf).toInt
-      println( "2^" + toThePowerOf +"=" + v)
-      l += v
-      val r =   n - v
-
-
-    }
-
-  //  println( paired(number))
-  //  println( drill(number) )
-       // val w = Math.pow(2,pow).toInt
-
-    0
   }
-  private def drill(number:Int):(ListBuffer[Int],Int)={
 
-    paired(number).foldLeft((new ListBuffer[Int](), 0))
-    {
-      case ((values, remainder), pair)=>
+  private def asHexadecimalsList(aNumber: Int): List[Int] = {
 
-        if(remainder>0){
-          val x = drill(remainder)
-          values ++= x._1
+    aNumber match {
+
+      case number if number <= 2 => number :: Nil
+      case number =>
+
+        val pow2Val = Math.pow(2, highestPower2In(number)).toInt
+
+        number - pow2Val match {
+          case 0 =>
+            pow2Val :: Nil
+          case remainder => pow2Val :: asHexadecimalsList(remainder)
         }
 
-        val toThePowerOf = Math.sqrt(pair._1 * pair._2).floor.toInt
-        val v =   Math.pow(2, toThePowerOf).toInt
-        values += v
-        val r =   pair._1 * pair._2 - v
+    }
 
-        println( "remainder:"+r)
+  }
 
-        val p = paired(r)
-        println( "-----")
 
-        (values, r)
+  private def asBinaryList(hexadecimalsList: List[Int]) = {
+
+    val size = highestPower2In(hexadecimalsList.head) + 1
+
+    List.fill(size)(0).zipWithIndex.reverse.map { case (_, toThePowerOfX) =>
+
+      val value = Math.pow(2, toThePowerOfX).toInt
+      if (hexadecimalsList.contains(value)) {
+        1
+      } else {
+        0
+      }
+
     }
   }
 
-private def decimate(number:Int):List[Int]= {
+  private def highestPower2In(number: Int): Int = {
 
-  number.toString.reverse.zipWithIndex.map {
+    var toThePowerOfX = 0
 
-    case (n, i) => {
-
-      val radix = (0 to i).foldLeft("1") {
-        (acc, i) =>
-          if (i == 0)
-            acc + ""
-          else acc + "0"
-      }.toInt
-
-      radix * n.toString.toInt
-
-
-
+    while (Math.pow(2, toThePowerOfX).toInt <= number) {
+      toThePowerOfX = toThePowerOfX + 1
     }
-
-  }.toList.reverse
-
-}
-
-private def paired(number:Int):List[(Int, Int)]= {
-
-  number.toString.reverse.zipWithIndex.map {
-
-    case (c, i) => {
-
-      val value = c.toString.toInt
-
-      val radix = (0 to i).foldLeft("1") {
-        (acc, i) =>
-          if (i == 0)
-            acc + ""
-          else acc + "0"
-      }.toInt
-      (radix, value)
-
-
+    if (toThePowerOfX > 0) {
+      toThePowerOfX - 1
+    } else {
+      0
     }
+  }
 
 
-  }.toList.reverse
-}
 }
