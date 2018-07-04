@@ -22,19 +22,19 @@ class P24Speck
       }
   }
 
-  "2" must "be List(1,0)" in {
+  "2" must "be List(1, 0)" in {
     P24.
       solution(2).
       shouldBe {
-        List(1,0)
+        List(1, 0)
       }
   }
 
-  "5" must "be List(1,0,1)" in {
+  "5" must "be List(1, 0, 1)" in {
     P24.
       solution(5).
       shouldBe {
-        List(1,0,1)
+        List(1, 0, 1)
       }
   }
 
@@ -70,27 +70,27 @@ class P24Speck
       }
   }
 
-  "269" must "be List(1,0,0,0,0,1,1,0,1)" in {
+  "269" must "be List(1, 0, 0, 0, 0, 1, 1, 0, 1)" in {
     P24.
       solution(269).
       shouldBe {
-        List(1,0,0,0,0,1,1,0,1)
+        List(1, 0, 0, 0, 0, 1, 1, 0, 1)
       }
   }
 
- "1412" must "be List(1,0,1,1,0,0,0,0,1,0,0)" in {
+ "1412" must "be List(1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0)" in {
     P24.
       solution(1412).
       shouldBe {
-        List(1,0,1,1,0,0,0,0,1,0,0)
+        List(1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0)
       }
   }
 
- "1413" must "be List(1,0,1,1,0,0,0,0,1,0,1)" in {
+ "1413" must "be List(1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1)" in {
     P24.
       solution(1413).
       shouldBe {
-        List(1,0,1,1,0,0,0,0,1,0,1)
+        List(1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1)
       }
   }
 
