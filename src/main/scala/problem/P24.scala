@@ -26,14 +26,12 @@ object P24 {
 
         remainder match {
           case 0 =>
-              Nil :+ highestPower2Result
+               Nil :+ highestPower2Result
           case r =>   asBase2List(r) :+ highestPower2Result
         }
     }
 
-
   }
-
 
   private def asBinaryList(l:List[Int], base2List: List[Int]):List[Int] = {
 
