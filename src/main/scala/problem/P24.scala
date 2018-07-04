@@ -4,15 +4,21 @@ object P24 {
 
   def solution(number: Int): List[Int] = {
 
-    asBinaryList(asBase2List(number))
+  val base2List =  asBase2List(number)
+  val binaryList  = asBinaryList(List(),base2List)
 
+    println(s"number : $number")
+    println(s" base2 : ${base2List.reverse.mkString(" ")}")
+    println(s"binary : ${binaryList.mkString(", ")}")
+    println("------------------------------------------")
+    binaryList
   }
 
   private def asBase2List(aNumber: Int): List[Int] = {
 
-    aNumber match {
+   aNumber match {
 
-      case number if number <= 2 => number :: Nil
+      case number if number <= 2 =>  Nil :+ number
       case number =>
         val highestPower2Result = Math.pow(2, highestExponentIn(2, number)).toInt
 
@@ -20,22 +26,28 @@ object P24 {
 
         remainder match {
           case 0 =>
-            highestPower2Result :: Nil
-          case r => highestPower2Result :: asBase2List(r)
+              Nil :+ highestPower2Result
+          case r =>   asBase2List(r) :+ highestPower2Result
         }
     }
+
+
   }
 
 
-  private def asBinaryList(hexadecimalsList: List[Int]) = {
+  private def asBinaryList(l:List[Int], base2List: List[Int]):List[Int] = {
 
-    val size = highestExponentIn(2, hexadecimalsList.head)
+    val number = Math.pow(2, l.size).toInt
 
-    List.fill(size+1)(0).zipWithIndex.reverse.map {
-      case (slot, exp) if (hexadecimalsList.contains(Math.pow(2, exp).toInt)) => 1
-      case _  => 0
+    base2List match {
+      case Nil => l
+      case 0::Nil => 0::l
+      case h::Nil if  h == number =>1::l
+      case h::Nil => asBinaryList (0::l, h::Nil )
+      case h::tail if  h == number => asBinaryList(1::l, tail)
+      case h::tail => asBinaryList(0::l, h::tail)
+
     }
-
   }
 
   private def highestExponentIn(base:Int, number: Int): Int = {

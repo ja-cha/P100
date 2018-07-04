@@ -30,6 +30,21 @@ class P24Speck
       }
   }
 
+  "3" must "be List(1, 1)" in {
+    P24.
+      solution(3).
+      shouldBe {
+        List(1, 1)
+      }
+  }
+  "4" must "be List(1,0,0)" in {
+    P24.
+      solution(4).
+      shouldBe {
+        List(1,0,0)
+      }
+  }
+
   "5" must "be List(1, 0, 1)" in {
     P24.
       solution(5).
