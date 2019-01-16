@@ -45,7 +45,7 @@ class P25(list1: List[Int], list2: List[Int]) {
           min
       }
 
-    recursive(list1, list2)
+    recursive(list1.sortWith(_ < _), list2.sortWith(_ < _))
   }
 
 }
