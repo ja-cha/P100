@@ -34,6 +34,7 @@ class P25(list1: List[Int], list2: List[Int]) {
 
           if (min.isEmpty | current < original) {
             min = Map[Int, Int](n1 -> n2)
+           // recursive(l1.tail, list2)
           }
           if (l2.tail.isEmpty) {
             recursive(l1.tail, list2)
@@ -42,7 +43,7 @@ class P25(list1: List[Int], list2: List[Int]) {
             recursive(l1, l2.tail)
           }
         }
-          min
+
       }
 
     recursive(list1.sortWith(_ < _), list2.sortWith(_ < _))
