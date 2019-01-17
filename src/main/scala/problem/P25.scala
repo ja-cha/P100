@@ -23,6 +23,9 @@ class P25(list1: List[Int], list2: List[Int]) {
 
   def recursiveSolution(): Map[Int, Int] = {
 
+    val list1Sorted = list1.sortWith(_ < _)
+    val list2Sorted = list2.sortWith(_ < _)
+
     def recursive(l1: List[Int], l2: List[Int]): Map[Int, Int] = {
 
       if (l1.isEmpty) {
@@ -37,20 +40,19 @@ class P25(list1: List[Int], list2: List[Int]) {
         val current = Math.abs(l1.head) + Math.abs(l2.head)
 
         if (original == 0 | current < original) {
-            min = Map[Int, Int](l1.head -> l2.head)
-            recursive(l1, l2.tail)
-
-        // }
-        //  else if(l1.head < l2.head){
-        //   recursive(l1.tail, list2)
-        }else{
+          min = Map[Int, Int](l1.head -> l2.head)
+          recursive(l1, l2.tail)
+        }
+        else if (l1.head < l2.head) {
+          recursive(l1.tail, list2Sorted)
+        } else {
           recursive(l1, l2.tail)
         }
 
       }
     }
 
-    recursive(list1.sortWith(_ < _), list2.sortWith(_ < _))
+    recursive(list1Sorted, list2Sorted)
   }
 
 }
