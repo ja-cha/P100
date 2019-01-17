@@ -41,9 +41,8 @@ class P25(list1: List[Int], list2: List[Int]) {
 
         if (original == 0 | current < original) {
           min = Map[Int, Int](l1.head -> l2.head)
-          recursive(l1, l2.tail)
         }
-        else if (l1.head < l2.head) {
+        if (l1.head < l2.head) {
           recursive(l1.tail, list2Sorted)
         } else {
           recursive(l1, l2.tail)
