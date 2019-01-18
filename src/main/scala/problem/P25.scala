@@ -61,6 +61,5 @@ class P25(l1: List[Int], l2: List[Int]) {
 }
 
 object P25 {
-
   def apply(list1: List[Int], list2: List[Int]): P25 = new P25(list1, list2)
 }
