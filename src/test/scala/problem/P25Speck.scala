@@ -17,14 +17,14 @@ class P25Speck
     }
   }
 
-  "recursiveSolution 1" must "be (12->11)" in {
+  "recursiveSolution 1" must "be (12->12)" in {
 
     val l1 = List(-12, 5, 84, 395, 12, 54, 156)
 
-    val l2 = List(15, 126, 64, 4, 18, 11, 256)
+    val l2 = List(15, 126, 64, 4, 18, 12, 256)
 
     P25(l1, l2).recursiveSolution().shouldBe {
-      (12 -> 11)
+      (12 -> 12)
     }
   }
 
@@ -38,14 +38,15 @@ class P25Speck
       (5 -> 4)
     }
   }
-  "recursiveSolution 2" must "be (12->1)" in {
+  "recursiveSolution 2" must "be (5->4)" in {
 
-    val l1 = List(-12, 50, 84, 395, 12, 54, 156)
+    val l1 = List(-12, 5, 84, 395, 123, 54, 156)
 
-    val l2 = List(15, 126, 64, 4, 18, 11, 256)
+    val l2 = List(15, 126, 64, 4, 18, 12, 256)
+
 
     P25(l1, l2).recursiveSolution().shouldBe {
-      (12 -> 11)
+      (5 -> 4)
     }
   }
 

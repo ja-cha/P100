@@ -38,20 +38,19 @@ class P25(l1: List[Int], l2: List[Int]) {
         val currentDistance = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
         val originalDistance = Math.abs(map._1.asInstanceOf[Long] - map._2.asInstanceOf[Long])
 
-        if (currentDistance < originalDistance) {
-          find(l1, l2.tail, (l1.head -> l2.head))
-        }
-        else if (currentDistance == originalDistance) {
+        if (currentDistance == 0) {
           find(List.empty, List.empty, (l1.head -> l2.head))
         }
-        else {
-          if (l1.head < l2.head) {
-            find(l1.tail, sortedList2, map)
-          }
-          else {
-            find(l1, l2.tail, map)
-          }
+        else if (currentDistance < originalDistance) {
+          find(l1, l2.tail, (l1.head -> l2.head))
         }
+        else if (l1.head < l2.head) {
+          find(l1.tail, sortedList2, map)
+        }
+        else {
+          find(l1, l2.tail, map)
+        }
+
       }
     }
 
