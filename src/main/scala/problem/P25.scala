@@ -3,7 +3,6 @@ package problem
 
 class P25(l1: List[Int], l2: List[Int]) {
 
-
   def solution(): (Int, Int) = {
 
     var map = (Int.MinValue, Int.MaxValue)
@@ -50,14 +49,11 @@ class P25(l1: List[Int], l2: List[Int]) {
         else {
           find(l1, l2.tail, map)
         }
-
       }
     }
 
     find(sortedList1, sortedList2, (Int.MinValue, Int.MaxValue))
-
   }
-
 }
 
 object P25 {
