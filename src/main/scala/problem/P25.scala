@@ -4,62 +4,58 @@ package problem
 class P25(l1: List[Int], l2: List[Int]) {
 
 
-  def solution(): Map[Int, Int] = {
+  def solution(): (Int, Int) = {
 
-    var min = Map.empty[Int, Int]
+    var map = (Int.MinValue, Int.MaxValue)
 
     l1.foreach(n1 => {
       l2.foreach(n2 => {
-        val originalDistance = Math.abs(min.keys.sum - min.values.sum)
-        val currentDistance = Math.abs(n1 - n2)
-        if (min.isEmpty | currentDistance <= originalDistance) {
-          min = Map[Int, Int](n1 -> n2)
+        val currentDistance = Math.abs(n1.asInstanceOf[Long] - n2.asInstanceOf[Long])
+        val originalDistance = Math.abs(map._1.asInstanceOf[Long] - map._2.asInstanceOf[Long])
+        if (currentDistance < originalDistance) {
+          map = (n1 -> n2)
         }
       })
     })
-    min
+    map
   }
 
-  def recursiveSolution(): Map[Int, Int] = {
+  def recursiveSolution(): (Int, Int) = {
 
-    val list1 =  l1.sortWith(_ < _)
-    val list2 = l2.sortWith(_ < _)
+    val sortedList1 = l1.sortWith(_ < _)
+    val sortedList2 = l2.sortWith(_ < _)
 
-    def recursive(aList1: List[Int], aList2: List[Int], min: Map[Int, Int]): Map[Int, Int] = {
+    def find(l1: List[Int], l2: List[Int], map: (Int, Int)): (Int, Int) = {
 
-      (aList1, aList2) match {
+      if (l1.isEmpty) {
+        map
+      }
+      else if (l2.isEmpty) {
+        find(l1.tail, sortedList2, map)
+      }
+      else {
 
-        case (l1, l2) if (l1.isEmpty) => {
-          min
+        val currentDistance = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
+        val originalDistance = Math.abs(map._1.asInstanceOf[Long] - map._2.asInstanceOf[Long])
+
+        if (currentDistance < originalDistance) {
+          find(l1, l2.tail, (l1.head -> l2.head))
         }
-        case (l1, l2) if (l2.isEmpty) => {
-          recursive(l1.tail, list2, min)
+        else if (currentDistance == originalDistance) {
+          find(List.empty, List.empty, (l1.head -> l2.head))
         }
-        case (l1, l2) => {
-
-          val currentDistance = Math.abs(l1.head - l2.head)
-          val originalDistance = Math.abs(min.keys.sum - min.values.sum)
-
-          if (min.isEmpty | currentDistance < originalDistance) {
-            recursive(l1, l2.tail, Map[Int, Int](l1.head -> l2.head))
-          }
-          else if (currentDistance == originalDistance) {
-            recursive(List.empty, List.empty, Map[Int, Int](l1.head -> l2.head))
+        else {
+          if (l1.head < l2.head) {
+            find(l1.tail, sortedList2, map)
           }
           else {
-            if (l1.head <= l2.head) {
-              recursive(l1.tail, list2, min)
-            }
-            else {
-              recursive(l1, l2.tail, min)
-            }
+            find(l1, l2.tail, map)
           }
-
         }
       }
     }
 
-    recursive(list1, list2, Map.empty)
+    find(sortedList1, sortedList2, (Int.MinValue, Int.MaxValue))
 
   }
 
