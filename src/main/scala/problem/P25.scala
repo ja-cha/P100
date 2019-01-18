@@ -11,9 +11,9 @@ class P25(list1: List[Int], list2: List[Int]) {
 
     list1.foreach(n1 => {
       list2.foreach(n2 => {
-        val original = Math.abs(min.keys.sum) + Math.abs(min.values.sum)
-        val current = Math.abs(n1) + Math.abs(n2)
-        if (min.isEmpty | current < original) {
+        val original = Math.abs(min.keys.sum - min.values.sum)
+        val current = Math.abs(n1 - n2)
+        if (min.isEmpty | current <= original) {
           min = Map[Int, Int](n1 -> n2)
         }
       })
@@ -26,28 +26,34 @@ class P25(list1: List[Int], list2: List[Int]) {
     val list1Sorted = list1.sortWith(_ < _)
     val list2Sorted = list2.sortWith(_ < _)
 
-    def recursive(l1: List[Int], l2: List[Int]): Map[Int, Int] = {
+    def recursive(list1: List[Int], list2: List[Int]): Map[Int, Int] = {
 
-      if (l1.isEmpty) {
-        min
-      }
-      else if (l2.tail.isEmpty) {
-        recursive(l1.tail, list2)
-      }
-      else {
+      (list1, list2) match {
 
-        val original = Math.abs(min.keys.sum) + Math.abs(min.values.sum)
-        val current = Math.abs(l1.head) + Math.abs(l2.head)
-
-        if (original == 0 | current < original) {
-          min = Map[Int, Int](l1.head -> l2.head)
+        case (l1, l2) if (l1.isEmpty) => {
+          min
         }
-        if (l1.head < l2.head) {
-          recursive(l1.tail, list2Sorted)
-        } else {
-          recursive(l1, l2.tail)
+        case (l1, l2) if (l2.isEmpty) => {
+          recursive(l1.tail, list2)
         }
+        case (l1, l2) => {
 
+          val original = Math.abs(min.keys.sum - min.values.sum)
+          val current = Math.abs(l1.head - l2.head)
+
+          if (min.isEmpty | current <= original) {
+            min = Map[Int, Int](l1.head -> l2.head)
+          }
+          if (current == original) {
+            recursive(List.empty, List.empty)
+          }
+          if (l1.head < l2.head) {
+            recursive(l1.tail, list2Sorted)
+          } else {
+            recursive(l1, l2.tail)
+          }
+
+        }
       }
     }
 
