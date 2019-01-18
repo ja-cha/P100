@@ -5,18 +5,18 @@ class P25(l1: List[Int], l2: List[Int]) {
 
   def solution(): (Int, Int) = {
 
-    var map = (Int.MinValue, Int.MaxValue)
+    var valuePair = (Int.MinValue, Int.MaxValue)
 
     l1.foreach(n1 => {
       l2.foreach(n2 => {
         val currentDistance = Math.abs(n1.asInstanceOf[Long] - n2.asInstanceOf[Long])
-        val originalDistance = Math.abs(map._1.asInstanceOf[Long] - map._2.asInstanceOf[Long])
+        val originalDistance = Math.abs(valuePair._1.asInstanceOf[Long] - valuePair._2.asInstanceOf[Long])
         if (currentDistance < originalDistance) {
-          map = (n1 -> n2)
+          valuePair = (n1 -> n2)
         }
       })
     })
-    map
+    valuePair
   }
 
   def recursiveSolution(): (Int, Int) = {
@@ -24,18 +24,18 @@ class P25(l1: List[Int], l2: List[Int]) {
     val sortedList1 = l1.sortWith(_ < _)
     val sortedList2 = l2.sortWith(_ < _)
 
-    def find(l1: List[Int], l2: List[Int], map: (Int, Int)): (Int, Int) = {
+    def find(l1: List[Int], l2: List[Int], valuePair: (Int, Int)): (Int, Int) = {
 
       if (l1.isEmpty) {
-        map
+        valuePair
       }
       else if (l2.isEmpty) {
-        find(l1.tail, sortedList2, map)
+        find(l1.tail, sortedList2, valuePair)
       }
       else {
 
         val currentDistance = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
-        val originalDistance = Math.abs(map._1.asInstanceOf[Long] - map._2.asInstanceOf[Long])
+        val originalDistance = Math.abs(valuePair._1.asInstanceOf[Long] - valuePair._2.asInstanceOf[Long])
 
         if (currentDistance == 0) {
           find(List.empty, List.empty, (l1.head -> l2.head))
@@ -44,10 +44,10 @@ class P25(l1: List[Int], l2: List[Int]) {
           find(l1, l2.tail, (l1.head -> l2.head))
         }
         else if (l1.head < l2.head) {
-          find(l1.tail, sortedList2, map)
+          find(l1.tail, sortedList2, valuePair)
         }
         else {
-          find(l1, l2.tail, map)
+          find(l1, l2.tail, valuePair)
         }
       }
     }
