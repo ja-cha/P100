@@ -30,7 +30,8 @@ class P25(l1: List[Int], l2: List[Int]) {
 
         case (List(), _) => valuePair
         case (_, List()) => find(l1.tail, sortedList2, valuePair)
-        case _ => val currentDistance = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
+        case _ =>
+          val currentDistance = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
           val originalDistance = Math.abs(valuePair._1.asInstanceOf[Long] - valuePair._2.asInstanceOf[Long])
           if (currentDistance == 0) {
             find(List.empty, List.empty, (l1.head -> l2.head))
