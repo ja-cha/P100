@@ -5,18 +5,18 @@ class P25(l1: List[Int], l2: List[Int]) {
 
   def solution(): (Int, Int) = {
 
-    var valuePair = (Int.MinValue, Int.MaxValue)
+    var smallestDifference = (Int.MinValue, Int.MaxValue)
 
     l1.foreach(n1 => {
       l2.foreach(n2 => {
-        val currentDistance = Math.abs(n1.asInstanceOf[Long] - n2.asInstanceOf[Long])
-        val originalDistance = Math.abs(valuePair._1.asInstanceOf[Long] - valuePair._2.asInstanceOf[Long])
-        if (currentDistance < originalDistance) {
-          valuePair = (n1 -> n2)
+        val currentDifference = Math.abs(n1.asInstanceOf[Long] - n2.asInstanceOf[Long])
+        val previousDifference = Math.abs(smallestDifference._1.asInstanceOf[Long] - smallestDifference._2.asInstanceOf[Long])
+        if (currentDifference < previousDifference) {
+          smallestDifference = (n1 -> n2)
         }
       })
     })
-    valuePair
+    smallestDifference
   }
 
   def recursiveSolution(): (Int, Int) = {
@@ -24,26 +24,37 @@ class P25(l1: List[Int], l2: List[Int]) {
     val sortedList1 = l1.sortWith(_ < _)
     val sortedList2 = l2.sortWith(_ < _)
 
-    def find(l1: List[Int], l2: List[Int], valuePair: (Int, Int)): (Int, Int) = {
+    def find(l1: List[Int], l2: List[Int], smallestDifference: (Int, Int)): (Int, Int) = {
 
       (l1, l2) match {
 
-        case (List(), _) => valuePair
-        case (_, List()) => find(l1.tail, sortedList2, valuePair)
+        case (List(), _) => smallestDifference
+        case (_, List()) => find(l1.tail, sortedList2, smallestDifference)
         case _ =>
-          val currentDistance = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
-          val originalDistance = Math.abs(valuePair._1.asInstanceOf[Long] - valuePair._2.asInstanceOf[Long])
-          if (currentDistance == 0) {
+
+          val currentDifference = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
+          val previousDifference = Math.abs(smallestDifference._1.asInstanceOf[Long] - smallestDifference._2.asInstanceOf[Long])
+          //Can't get any smaller, done
+          if (currentDifference == 0) {
             find(List.empty, List.empty, (l1.head -> l2.head))
           }
-          else if (currentDistance < originalDistance) {
-            find(l1, l2.tail, (l1.head -> l2.head))
+          else if (currentDifference < previousDifference) {
+            //Current number of l1 is smaller than current number of l2
+            if (l1.head < l2.head) {
+              // Any subsequent number in l2 will increase in size. From here one the difference can only increase.
+              // So it is not necessary to compare the current number of l1 against the remaining items in l2.
+              // Continue with the tail of l1
+              find(l1.tail, l2, (l1.head -> l2.head))
+            }
+            else {
+              find(l1, l2.tail, (l1.head -> l2.head))
+            }
           }
           else if (l1.head < l2.head) {
-            find(l1.tail, sortedList2, valuePair)
+            find(l1.tail, l2, smallestDifference)
           }
           else {
-            find(l1, l2.tail, valuePair)
+            find(l1, l2.tail, smallestDifference)
           }
       }
 
