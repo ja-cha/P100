@@ -21,15 +21,13 @@ class P25(l1: List[Int], l2: List[Int]) {
 
   def recursiveSolution(): (Int, Int) = {
 
-    val sortedList1 = l1.sortWith(_ < _)
-    val sortedList2 = l2.sortWith(_ < _)
 
     def find(l1: List[Int], l2: List[Int], smallestDifference: (Int, Int)): (Int, Int) = {
 
       (l1, l2) match {
 
         case (List(), _) => smallestDifference
-        case (_, List()) => find(l1.tail, sortedList2, smallestDifference)
+        case (_, List()) => find(l1.tail, l2, smallestDifference)
         case _ =>
 
           val currentDifference = Math.abs(l1.head.asInstanceOf[Long] - l2.head.asInstanceOf[Long])
@@ -57,10 +55,9 @@ class P25(l1: List[Int], l2: List[Int]) {
             find(l1, l2.tail, smallestDifference)
           }
       }
-
     }
 
-    find(sortedList1, sortedList2, (Int.MinValue, Int.MaxValue))
+    find(l1.sortWith(_ < _), l2.sortWith(_ < _), (Int.MinValue, Int.MaxValue))
   }
 }
 
