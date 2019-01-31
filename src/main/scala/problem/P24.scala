@@ -7,10 +7,10 @@ object P24 {
   val base2List =  asBase2List(number)
   val binaryList  = asBinaryList(List(),base2List)
 
-    println(s"number : $number")
-    println(s" base2 : ${base2List.reverse.mkString(" ")}")
-    println(s"binary : ${binaryList.mkString(", ")}")
-    println("------------------------------------------")
+    println(s"  decimal (base  10) : $number")
+    println(s"= binary  (base   2) : ${base2List.reverse.mkString(" + ")}")
+    println(s"= binary  (expanded) : ${binaryList.mkString(", ")}")
+    println("-------------------------------------------------------------")
     binaryList
   }
 
