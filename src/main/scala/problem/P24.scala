@@ -14,25 +14,50 @@ object P24 {
     base2ExpandedList
   }
 
+  /**
+    * for example:
+    * input number: 269
+    * as base 2 list: 256, 8, 4, 1
+    *
+    */
   private def asBase2List(aNumber: Int): List[Int] = {
+
+    /**
+      * for example:
+      * the highest base 2 number that fits into 269 is 256
+      *
+      */
+   def highestBase2ThatFitsInto(aNumber: Int): Int = {
+
+      var powOf = 0
+      while (Math.pow(2, powOf).toInt <= aNumber) {
+        powOf = powOf + 1
+      }
+      if (powOf > 0) {powOf - 1} else {0}
+   }
 
    aNumber match {
 
       case number if number <= 2 =>  Nil :+ number
       case number =>
-        val highestPower2Result = Math.pow(2, highestExponentIn(2, number)).toInt
+        val highestBase2 = Math.pow(2, highestBase2ThatFitsInto(number)).toInt
 
-        val remainder = number - highestPower2Result
+        val nextHighestBase2 = number - highestBase2
 
-        remainder match {
-          case 0 =>
-               Nil :+ highestPower2Result
-          case r =>   asBase2List(r) :+ highestPower2Result
+        nextHighestBase2 match {
+          case 0 =>  Nil :+ highestBase2
+          case r =>   asBase2List(r) :+ highestBase2
         }
     }
 
   }
 
+  /**
+    * for example
+    * base 2 list of: 256, 8, 4, 1
+    * in expanded binary would be: 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0
+    *
+    */
   private def asBase2ExpandedList(base2List: List[Int], seedList:List[Int]):List[Int] = {
 
     val number = Math.pow(2, seedList.size).toInt
@@ -48,19 +73,7 @@ object P24 {
     }
   }
 
-  private def highestExponentIn(base:Int, number: Int): Int = {
 
-    var highestExponent= 0
-
-    while (Math.pow(base, highestExponent).toInt <= number) {
-      highestExponent = highestExponent + 1
-    }
-    if (highestExponent > 0) {
-      highestExponent - 1
-    } else {
-      0
-    }
-  }
 
 
 }
