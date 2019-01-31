@@ -5,13 +5,13 @@ object P24 {
   def solution(number: Int): List[Int] = {
 
   val base2List =  asBase2List(number)
-  val binaryList  = asBinaryList(List(),base2List)
+  val base2ExpandedList  = asBase2ExpandedList(base2List, List.empty)
 
     println(s"  decimal (base  10) : $number")
     println(s"= binary  (base   2) : ${base2List.reverse.mkString(" + ")}")
-    println(s"= binary  (expanded) : ${binaryList.mkString(", ")}")
+    println(s"= binary  (expanded) : ${base2ExpandedList.mkString(", ")}")
     println("-------------------------------------------------------------")
-    binaryList
+    base2ExpandedList
   }
 
   private def asBase2List(aNumber: Int): List[Int] = {
@@ -33,17 +33,17 @@ object P24 {
 
   }
 
-  private def asBinaryList(l:List[Int], base2List: List[Int]):List[Int] = {
+  private def asBase2ExpandedList(base2List: List[Int], seedList:List[Int]):List[Int] = {
 
-    val number = Math.pow(2, l.size).toInt
+    val number = Math.pow(2, seedList.size).toInt
 
     base2List match {
-      case Nil => l
-      case 0::Nil => 0::l
-      case h::Nil if  h == number =>1::l
-      case h::Nil => asBinaryList (0::l, h::Nil )
-      case h::tail if  h == number => asBinaryList(1::l, tail)
-      case h::tail => asBinaryList(0::l, h::tail)
+      case Nil => seedList
+      case 0::Nil => 0::seedList
+      case h::Nil if  h == number =>1::seedList
+      case h::Nil => asBase2ExpandedList (h::Nil, 0::seedList )
+      case h::tail if  h == number => asBase2ExpandedList(tail, 1::seedList)
+      case h::tail => asBase2ExpandedList(h::tail, 0::seedList)
 
     }
   }
