@@ -1,9 +1,9 @@
 package problem
 
 
-class P25(l1: List[Int], l2: List[Int]) {
+object P25 {
 
-  def solution(): (Int, Int) = {
+  def solution(l1: List[Int], l2: List[Int]): (Int, Int) = {
 
     var smallestDifference = (Int.MinValue, Int.MaxValue)
 
@@ -19,8 +19,7 @@ class P25(l1: List[Int], l2: List[Int]) {
     smallestDifference
   }
 
-  def recursiveSolution(): (Int, Int) = {
-
+  def recursiveSolution(l1: List[Int], l2: List[Int]): (Int, Int) = {
 
     def find(l1: List[Int], l2: List[Int], smallestDifference: (Int, Int)): (Int, Int) = {
 
@@ -59,8 +58,5 @@ class P25(l1: List[Int], l2: List[Int]) {
 
     find(l1.sortWith(_ < _), l2.sortWith(_ < _), (Int.MinValue, Int.MaxValue))
   }
-}
 
-object P25 {
-  def apply(list1: List[Int], list2: List[Int]): P25 = new P25(list1, list2)
 }

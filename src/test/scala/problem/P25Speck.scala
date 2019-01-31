@@ -12,7 +12,7 @@ class P25Speck
 
     val l2 = List(15, 126, 64, 4, 18, 12, 256)
 
-    P25(l1, l2).solution().shouldBe {
+    P25.solution(l1, l2).shouldBe {
       (12 -> 12)
     }
   }
@@ -23,7 +23,7 @@ class P25Speck
 
     val l2 = List(15, 126, 64, 4, 18, 12, 256)
 
-    P25(l1, l2).recursiveSolution().shouldBe {
+    P25.recursiveSolution(l1, l2).shouldBe {
       (12 -> 12)
     }
   }
@@ -34,7 +34,7 @@ class P25Speck
 
     val l2 = List(15, 126, 64, 4, 18, 12, 256)
 
-    P25(l1, l2).solution().shouldBe {
+    P25.solution(l1, l2).shouldBe {
       (5 -> 4)
     }
   }
@@ -45,7 +45,7 @@ class P25Speck
     val l2 = List(15, 126, 64, 4, 18, 12, 256)
 
 
-    P25(l1, l2).recursiveSolution().shouldBe {
+    P25.recursiveSolution(l1, l2).shouldBe {
       (5 -> 4)
     }
   }
@@ -56,7 +56,7 @@ class P25Speck
 
     val l2 = List(115, -126, -64, 48, 18, 12, 256)
 
-    P25(l1, l2).solution().shouldBe {
+    P25.solution(l1, l2).shouldBe {
       (5 -> 12)
     }
   }
@@ -67,7 +67,7 @@ class P25Speck
 
     val l2 = List(115, -126, -64, 48, 18, 12, 256)
 
-    P25(l1, l2).recursiveSolution().shouldBe {
+    P25.recursiveSolution(l1, l2).shouldBe {
       (5 -> 12)
     }
   }
