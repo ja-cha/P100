@@ -15,15 +15,16 @@ object P24 {
   }
 
   /**
-    * for example:
-    * input number: 269
-    * as base 2 list: 256, 8, 4, 1
+    * for example,
+    * the input number 269
+    * would a list of (256, 8, 4, 1)
+    * if presented in base 2 format
     *
     */
   private def asBase2List(aNumber: Int): List[Int] = {
 
     /**
-      * for example:
+      * for example,
       * the highest base 2 number that fits into 269 is 256
       *
       */
@@ -53,9 +54,10 @@ object P24 {
   }
 
   /**
-    * for example
-    * base 2 list of: 256, 8, 4, 1
-    * in expanded binary would be: 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0
+    * for example,
+    * base 2 list (256, 8, 4, 1)
+    * would be (1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0)
+    * if presented in base 2 expanded format
     *
     */
   private def asBase2ExpandedList(base2List: List[Int], seedList:List[Int]):List[Int] = {
