@@ -38,8 +38,8 @@ object P25 {
           else if (currentDifference < previousDifference) {
             //Current number of l1 is smaller than current number of l2
             if (l1.head < l2.head) {
-              // Any subsequent number in l2 will increase in size. From here one the difference can only increase.
-              // So it is not necessary to compare the current number of l1 against the remaining items in l2.
+              // Any subsequent number in l2 will increase and thus, the difference can only increase.
+              // It is not necessary to compare the current number of l1 against the remaining items in l2.
               // Continue with the tail of l1
               find(l1.tail, l2, (l1.head -> l2.head))
             }
